@@ -1,1 +1,0 @@
-Hier sollen neue Klassen erstellt werden.
