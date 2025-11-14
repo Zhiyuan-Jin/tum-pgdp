@@ -1,7 +1,5 @@
 package pgdp.pingunumbers;
 
-import static pgdp.pingunumbers.Utils.reduce;
-
 public class MixedPinguNumber {
     public int numerator;
     public int denominator;
@@ -15,12 +13,12 @@ public class MixedPinguNumber {
         this.wholePart = wholePart;
     }
 
-    public void  printAsDouble() {
+    public void printAsDouble() {
         // TODO 2.1: Implement the method.
         System.out.println(wholePart + (double) numerator / denominator);
     }
 
-    public void  prettyPrint() {
+    public void prettyPrint() {
         // TODO 2.2: Implement the method.
         System.out.println(wholePart + " " + numerator + "/" + denominator);
     }
@@ -28,8 +26,8 @@ public class MixedPinguNumber {
 
     public void extractWholePart() {
 
-            wholePart += numerator / denominator;
-            numerator = numerator % denominator;
+        wholePart += numerator / denominator;
+        numerator = numerator % denominator;
 
         // TODO 3.1: Implement the method.
 
@@ -44,8 +42,7 @@ public class MixedPinguNumber {
     public void normalize() {
         // TODO 3.3: Implement the method.
         extractWholePart();
-        reduce(this);
-
+        Utils.reduce(this);
     }
 
 
@@ -73,21 +70,28 @@ public class MixedPinguNumber {
      */
     public void multiply(MixedPinguNumber other) {
         // TODO 4.2: Implement the method.
-      mergeWholePart();
-        other.mergeWholePart();
-        numerator = this.numerator * other.numerator;
-        denominator = this.denominator * other.denominator;
 
+        System.out.println(wholePart);
+
+        int de = this.denominator * other.denominator;
+        int n = (this.wholePart * this.denominator + this.numerator) * (other.wholePart * other.denominator + other.numerator);
+        this.denominator = de;
+        this.numerator = n;
+        System.out.println("numerator: " + numerator + " denominator: " + denominator + " wholePart; " + wholePart);
+
+
+        wholePart=0;
         normalize();
+        System.out.println("numerator: " + numerator + " denominator: " + denominator + " wholePart; " + wholePart);
     }
 
     public void invert() {
         // TODO 4.3: Implement the method.
         MixedPinguNumber a = new MixedPinguNumber(numerator, denominator, wholePart);
         a.mergeWholePart();
-        numerator   = a.denominator;
+        numerator = a.denominator;
         denominator = a.numerator;
-        wholePart   = 0;
+        wholePart = 0;
     }
 }
 
